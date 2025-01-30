@@ -1,5 +1,5 @@
 Question 1: "What would happen if gravity disappeared for 10 seconds?"
-Model: Falcon3 10B Instruct:
+Model: Falcon3 10B Instruct
 Response 1: In a hypothetical situation where gravity disappeared for 10 seconds, several dramatic changes would occur:
 
 1. **Objects and people would lose contact with the ground and become weightless**: Any person or object on Earth's surface, including those in a building, would float up as if they were in space.
