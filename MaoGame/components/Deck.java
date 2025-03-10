@@ -56,6 +56,14 @@ public class Deck <CardT extends Card> extends Stack<CardT> {
         }
     }
 
+    public void removeCard(CardT card) {
+        for (int i = 0; i < size(); i++) {
+            if (get(i).equals(card)) {
+                remove(i);
+            }
+        }
+    }
+
     //intended to create a new shuffled deck from two decks
     public Deck<CardT> combineDecks(Deck<CardT> d1, Deck<CardT> d2) {
         Deck<CardT> out = new Deck<CardT>();

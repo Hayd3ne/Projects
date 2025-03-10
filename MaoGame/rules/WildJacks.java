@@ -15,4 +15,9 @@ extends Rule<GameT, AgentT> {
     public void apply(MaoCard card, GameT game, AgentT agent) {
         card.setProperty((Object)MaoCard.property.WILD, true);
     }
+
+    @Override
+    public void undo(MaoCard card, GameT game, AgentT agent) {
+        card.setProperty((Object)MaoCard.property.WILD, false);
+    }
 }
