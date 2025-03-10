@@ -36,6 +36,9 @@ public class Card {
     private ranks rank;
     private suits suit;
     private String image;
+
+    public Card () {this(Card.ranks.ACE, Card.suits.SPADES);} 
+    
     public Card(ranks r, suits s) {
         rank = r;
         suit = s;
@@ -62,6 +65,15 @@ public class Card {
     public suits getSuit() {
         return this.suit;
     }
+
+    public int getValue() {
+        return this.rank.getValue();
+    }
+
+    public void setValue(int value) {
+        this.rank.setValue(value);
+    }
+
 
     public String getCardImage(Card this) {
         return this.image;

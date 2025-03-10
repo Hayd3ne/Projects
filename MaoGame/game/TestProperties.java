@@ -13,6 +13,7 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
     private RuleEngine re;
     private List<Object> rules;
     private MaoCard.suits curSuit;
+    private int deckSize;
 
 
     public static void main(String[] args) {
@@ -52,7 +53,12 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
         this.rules.add(new SameRanks());
         this.rules.add(new SameSuits()); // The round 1 rules
         this.rules.add(new JacksChangeSuit());
+        this.rules.add(new Include11());
+        this.rules.add(new Include1());
+        this.rules.add(new Include0());
         this.re.applyRules(rules, deck, this, null);
+        this.deckSize = this.deck.size();
+        this.deck.shuffle();
     }
 
     public RuleEngine getRuleEngine() {
@@ -100,6 +106,7 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
 
         if (card != null) {
             System.out.println("Player "+player.getId()+" played "+card);
+            System.out.println("Card Properties: "+card.getProperties());
             discard.addCard(card);
         }
         else {
@@ -113,7 +120,7 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
             System.out.println("Player "+player.getId()+" wins!");
             return false;
         }
-        if (deck.isEmpty()||discard.size() == 52) {
+        if (deck.isEmpty()||discard.size() == this.deckSize) {
             System.out.println("There are no more cards in the deck. Shuffling...");
             //shuffle all but the top card in the discard pile back into the deck
             MaoCard top2 = discard.drawCard();
