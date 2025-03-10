@@ -21,4 +21,13 @@ extends Rule<GameT, AgentT> {
         deck.addCard(new MaoCard(MaoCard.ranks.ELEVEN, MaoCard.suits.HEARTS,true));
         deck.addCard(new MaoCard(MaoCard.ranks.ELEVEN, MaoCard.suits.SPADES,true));
     }
+
+    @Override
+    public void undo(MaoCard card, GameT game, AgentT agent) {
+        Deck<MaoCard> deck = game.getDeck();
+        deck.removeCard(new MaoCard(MaoCard.ranks.ELEVEN, MaoCard.suits.CLUBS,true));
+        deck.removeCard(new MaoCard(MaoCard.ranks.ELEVEN, MaoCard.suits.DIAMONDS,true));
+        deck.removeCard(new MaoCard(MaoCard.ranks.ELEVEN, MaoCard.suits.HEARTS,true));
+        deck.removeCard(new MaoCard(MaoCard.ranks.ELEVEN, MaoCard.suits.SPADES,true));
+    }
 }
