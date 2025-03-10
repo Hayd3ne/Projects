@@ -1,9 +1,6 @@
 package mao.src.main.java.com.mao;
 
-/**
- * Hello world!
- *
- */
+
 public class Main 
 {
     public static void main( String[] args )
