@@ -1,0 +1,1 @@
+#### This directory is for Mao, a card shedding game.
