@@ -14,6 +14,6 @@ extends Rule<GameT, AgentT> {
 
     @Override
     public void apply(MaoCard card, GameT game, AgentT agent) {
-        card.setProperty("suitParity", true);
+        card.setProperty(MaoCard.property.SUITPARITY, true);
     }
 }
