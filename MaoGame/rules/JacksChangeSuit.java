@@ -8,11 +8,11 @@ extends Rule<GameT, AgentT> {
 
     @Override
     public boolean isValid(MaoCard card, GameT game, AgentT agent) {
-        return card.getRank() == MaoCard.ranks.JACK;
+        return card.getMaoRank() == MaoCard.ranks.JACK;
     }
 
     @Override
     public void apply(MaoCard card, GameT game, AgentT agent) {
-        card.setProperty("chooseSuit", true);
+        card.setProperty((Object)MaoCard.property.CHANGESUIT, true);
     }
 }
