@@ -35,20 +35,17 @@ public class RuleEngine <RuleT extends Rule, AgentT extends Agent, GameT extends
         //System.out.println(card.getProperties());
         if (card.getProperty(MaoCard.property.WILD) != null) if (card.getProperty(MaoCard.property.WILD).equals(true)) {
             lastCards.addCard(lastCard);
-            cardEffect(card, game, agent);
             return true;
         }
         if (lastCard.getProperty(MaoCard.property.RANKPARITY) != null) if (lastCard.getProperty(MaoCard.property.RANKPARITY).equals(true)) {
             if (card.getRank() == lastCard.getRank()) {
                 lastCards.addCard(lastCard);
-                cardEffect(card, game, agent);
                 return true;
             }
         }
         if (lastCard.getProperty(MaoCard.property.SUITPARITY) != null) if (lastCard.getProperty(MaoCard.property.SUITPARITY).equals(true)) {
             if (card.getSuit() == game.getCurSuit()) {
                 lastCards.addCard(lastCard);
-                cardEffect(card, game, agent);
                 return true;
             }
         }
@@ -57,10 +54,15 @@ public class RuleEngine <RuleT extends Rule, AgentT extends Agent, GameT extends
     }
 
     public void cardEffect(MaoCard card, GameT game, AgentT agent) {
-        if (card.getProperty(MaoCard.property.CHANGESUIT) != null) if (card.getProperty(MaoCard.property.CHANGESUIT).equals(true)) {
-            MaoCard c = (MaoCard) agent.chooseSuit(game, card);
-            //System.out.println("Player " + agent.getId() + " Changed to " + c.getSuit());
+        if (card.getProperty(MaoCard.property.CHANGESUIT) != null) {
+            if (card.getProperty(MaoCard.property.CHANGESUIT).equals(true)) {
+                MaoCard c = (MaoCard) agent.chooseSuit(game, card);
+                //System.out.println("Player " + agent.getId() + " Changed to " + c.getSuit());
+            }
+        }  
+        else {
+            //System.out.println("Suit Changed");
+            game.setSuit((MaoCard.suits)card.getProperty(MaoCard.property.SUIT));
         }
-        else game.setSuit(card.getSuit());
     }
 }

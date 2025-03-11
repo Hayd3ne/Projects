@@ -53,9 +53,9 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
         this.rules.add(new SameRanks());
         this.rules.add(new SameSuits()); // The round 1 rules
         this.rules.add(new JacksChangeSuit());
-        this.rules.add(new Include11());
-        this.rules.add(new Include1());
-        this.rules.add(new Include0());
+        //this.rules.add(new Include11());
+        //this.rules.add(new Include1());
+        //this.rules.add(new Include0());
         this.re.applyRules(rules, deck, this, null);
         this.deckSize = this.deck.size();
         this.deck.shuffle();
@@ -107,7 +107,8 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
         if (card != null) {
             System.out.println("Player "+player.getId()+" played "+card);
             System.out.println("Card Properties: "+card.getProperties());
-            discard.addCard(card);
+            this.discard.addCard(card);
+            this.re.cardEffect(card, this, player);
         }
         else {
             System.out.println("Player "+player.getId()+" drew a card.");
