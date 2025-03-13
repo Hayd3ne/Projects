@@ -2,8 +2,6 @@ package agents;
 import components.MaoCard;
 import game.TestProperties;
 
-import java.util.Arrays;
-
 import components.Deck;
 
 public class TestAgent extends Agent<TestProperties, MaoCard> {
@@ -51,7 +49,6 @@ public class TestAgent extends Agent<TestProperties, MaoCard> {
         System.out.println("Player " + id + " chose " + suit);
         for (int i = 0; i < hand.length; i++) {
             if (hand[i].getSuit() == suit) {
-
                 return hand[i];
             }
         }

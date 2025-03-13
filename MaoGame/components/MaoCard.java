@@ -37,13 +37,13 @@ public class MaoCard extends Card {
     private HashMap<Object, Object> properties;
 
     private ranks rank;
-    private suits suit;
+    private Card.suits MaoSuit;
     private String image;
 
     public MaoCard(ranks r, suits s) {
         super(r.r, s);
-        this.rank = r;
-        this.suit = s;
+        this.rank = (ranks)r;
+        this.MaoSuit = s;
         this.properties = new HashMap<>();
         this.properties.put(property.RANK, r);
         this.properties.put(property.SUIT, s);
@@ -53,9 +53,9 @@ public class MaoCard extends Card {
         return properties;
     }
 
-    public MaoCard(ranks r, suits s, boolean marker) {
+    public MaoCard(ranks r, Card.suits s, boolean marker) {
         this.rank = r;
-        this.suit = s;
+        this.MaoSuit = s;
         String card = "";
         if (this.rank == MaoCard.ranks.ELEVEN) card += "E";
         else if (this.rank == MaoCard.ranks.ZERO) card += "0";
@@ -71,6 +71,13 @@ public class MaoCard extends Card {
 
     public MaoCard(Card.ranks r, Card.suits s) {
         this(getMaoRank(r),s);
+    }
+
+    @Override
+    public Card.suits getSuit() {
+        if (this.MaoSuit != null) return this.MaoSuit;
+        if (this.properties.get(property.SUIT) != null) return (Card.suits) this.properties.get(property.SUIT);
+        return null;
     }
 
     public Object getProperty(Object key) {
@@ -129,7 +136,7 @@ public class MaoCard extends Card {
 
     @Override
     public String toString() {
-        return this.rank + " of " + this.suit;
+        return this.rank + " of " + this.MaoSuit;
     }
 
 }

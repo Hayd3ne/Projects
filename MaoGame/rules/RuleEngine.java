@@ -38,13 +38,15 @@ public class RuleEngine <RuleT extends Rule, AgentT extends Agent, GameT extends
             return true;
         }
         if (lastCard.getProperty(MaoCard.property.RANKPARITY) != null) if (lastCard.getProperty(MaoCard.property.RANKPARITY).equals(true)) {
-            if (card.getRank() == lastCard.getRank()) {
+            if (card.getProperty(MaoCard.property.RANK) == lastCard.getProperty(MaoCard.property.RANK)) {
+                //System.out.println("Card Rank: " + card.getProperty(MaoCard.property.RANK));
                 lastCards.addCard(lastCard);
                 return true;
             }
         }
         if (lastCard.getProperty(MaoCard.property.SUITPARITY) != null) if (lastCard.getProperty(MaoCard.property.SUITPARITY).equals(true)) {
             if (card.getSuit() == game.getCurSuit()) {
+                //System.out.println("Card Suit: " + card.getSuit());
                 lastCards.addCard(lastCard);
                 return true;
             }

@@ -49,13 +49,13 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
 
         this.re = new RuleEngine();
         this.rules = new java.util.ArrayList<>();
+        this.rules.add(new Include11());
+        this.rules.add(new Include1());
+        this.rules.add(new Include0());
         this.rules.add(new WildJacks());
         this.rules.add(new SameRanks());
         this.rules.add(new SameSuits()); // The round 1 rules
         this.rules.add(new JacksChangeSuit());
-        //this.rules.add(new Include11());
-        //this.rules.add(new Include1());
-        //this.rules.add(new Include0());
         this.re.applyRules(rules, deck, this, null);
         this.deckSize = this.deck.size();
         this.deck.shuffle();
