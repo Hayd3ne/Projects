@@ -4,6 +4,7 @@ import game.TestProperties;
 
 import components.Deck;
 
+@SuppressWarnings("rawtypes")
 public class TestAgent extends Agent<TestProperties, MaoCard> {
     private int id;
     private MaoCard[] hand;
@@ -13,6 +14,7 @@ public class TestAgent extends Agent<TestProperties, MaoCard> {
         this.hand = new MaoCard[0];
     }
 
+    @SuppressWarnings("unchecked")
     public MaoCard takeTurn(TestProperties game) {
         for (int i = 0; i < hand.length; i++) {
             if (game.getRuleEngine().isPlayValid(hand[i],game,this)) {

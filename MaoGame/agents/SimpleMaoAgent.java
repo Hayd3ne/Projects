@@ -2,14 +2,13 @@ package agents;
 
 import components.Deck;
 import components.MaoCard;
-import components.MaoCard.property;
 import game.TestProperties;
 import rules.*;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
+@SuppressWarnings("rawtypes")
 public class SimpleMaoAgent extends MaoAgent<TestProperties<Rule>> {
     private List<MaoCard> hand;
     private List<Rule> knownRules;

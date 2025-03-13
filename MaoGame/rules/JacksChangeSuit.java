@@ -3,6 +3,7 @@ import components.MaoCard;
 import game.Game;
 import agents.Agent;
 
+@SuppressWarnings("rawtypes")
 public class JacksChangeSuit <GameT extends Game<AgentT, MaoCard>, AgentT extends Agent> 
 extends Rule<GameT, AgentT> {
 

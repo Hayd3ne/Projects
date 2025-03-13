@@ -38,6 +38,7 @@ public class MaoCard extends Card {
 
     private ranks rank;
     private Card.suits MaoSuit;
+    @SuppressWarnings("unused")
     private String image;
 
     public MaoCard(ranks r, suits s) {

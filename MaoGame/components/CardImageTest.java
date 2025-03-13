@@ -1,13 +1,10 @@
 package components;
 import javax.swing.*;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.BorderLayout;
-import java.awt.image.BufferedImage;
 
 public class CardImageTest {
     public static void main(String[] args) {
-        Deck deck = new Deck(52);
+        Deck<Card> deck = new Deck<Card>(52);
         deck.shuffle();
         JFrame frame = new JFrame("Card Image Test");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

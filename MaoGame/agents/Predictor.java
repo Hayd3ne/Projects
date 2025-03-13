@@ -5,6 +5,7 @@ import components.MaoCard.property;
 import rules.Rule;
 import java.util.List;
 
+@SuppressWarnings("rawtypes")
 public interface Predictor {
     public List<property> getProperties (MaoCard lastCard, MaoCard card);
     public List<Rule> predictRules (List<property> properties);

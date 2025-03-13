@@ -27,6 +27,7 @@ public abstract class MaoAgent <GameT extends Game<?, MaoCard>> extends Agent<Ga
         return properties;
     }
 
+    @SuppressWarnings("rawtypes")
     public List<Rule> predictRules (List<property> prediction) {
         List<Rule> rules = new java.util.ArrayList<>();
         if (prediction.contains(property.WILD)) {
@@ -44,6 +45,7 @@ public abstract class MaoAgent <GameT extends Game<?, MaoCard>> extends Agent<Ga
         return rules;
     }
     
+    @SuppressWarnings("rawtypes")
     public List<Rule> predictRules (List<Rule> prediction, MaoCard lastCard, MaoCard card) {
         List<property> properties = getProperties(lastCard, card);
         List<Rule> rules = predictRules(properties);

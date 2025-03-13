@@ -4,6 +4,7 @@ import game.Game;
 import agents.Agent;
 
 
+@SuppressWarnings("rawtypes")
 public class SameSuits <GameT extends Game<AgentT, MaoCard>, AgentT extends Agent> 
 extends Rule<GameT, AgentT> {
 

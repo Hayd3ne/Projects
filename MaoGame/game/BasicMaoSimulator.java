@@ -5,22 +5,22 @@ import agents.BasicMaoAgent;
 
 
 public class BasicMaoSimulator {
-    private Deck deck;
-    private Deck discard;
+    private Deck<Card> deck;
+    private Deck<Card> discard;
     private Card.suits curSuit;
     private Card.ranks curRank;
     private BasicMaoAgent[] players;
 
     public BasicMaoSimulator(int numPlayers) {
-        this.deck = new Deck(52);
-        this.discard = new Deck();
+        this.deck = new Deck<Card>(52);
+        this.discard = new Deck<Card>();
         this.players = new BasicMaoAgent[numPlayers];
     }
     
     public static void main(String[] args) {
         BasicMaoSimulator simulator = new BasicMaoSimulator(3);
-        Deck deck = simulator.deck;
-        Deck discard = simulator.discard;
+        Deck<Card> deck = simulator.deck;
+        Deck<Card> discard = simulator.discard;
         deck.shuffle();
 
         for (int i = 0; i < simulator.players.length; i++) {
@@ -29,7 +29,7 @@ public class BasicMaoSimulator {
 
         boolean running = true;
         discard.addCard(deck.drawCard()); //have to have a starting card
-        int count = 0;
+        //int count = 0;
         while (running) {
             for (BasicMaoAgent player : simulator.players) {
                 running = simulator.step(player);
@@ -102,11 +102,11 @@ public class BasicMaoSimulator {
         }
     }
 
-    public Deck getDeck() {
+    public Deck<Card> getDeck() {
         return this.deck;
     }
     
-    public Deck getDiscard() {
+    public Deck<Card> getDiscard() {
         return this.discard;
     }
 

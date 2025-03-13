@@ -3,6 +3,7 @@ import components.Card;
 import components.Deck;
 import game.Game;
 
+@SuppressWarnings("rawtypes")
 public abstract class Agent<GameT extends Game, CardT extends Card> {
     public abstract int getId();
     public abstract CardT[] getHand();

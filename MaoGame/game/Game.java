@@ -3,6 +3,7 @@ import components.Deck;
 import agents.Agent;
 import components.Card;
 
+@SuppressWarnings("rawtypes")
 public abstract class Game<AgentT extends Agent, CardT extends Card> {
     public abstract AgentT[] getPlayers();
     public abstract boolean step(AgentT player);

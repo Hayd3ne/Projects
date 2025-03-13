@@ -5,6 +5,7 @@ import agents.TestAgent;
 import rules.*;
 import java.util.List;
 
+@SuppressWarnings("rawtypes")
 public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard> {
 
     private Deck<MaoCard> deck;
@@ -16,6 +17,7 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
     private int deckSize;
 
 
+    @SuppressWarnings("unchecked")
     public static void main(String[] args) {
             TestProperties game = new TestProperties();
 
@@ -38,6 +40,8 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
                 }
             }
     }
+
+    @SuppressWarnings("unchecked")
     public TestProperties() {
         this.deck = new Deck<MaoCard>(52, new MaoCard());
         this.deck.shuffle();
@@ -85,6 +89,7 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
         this.curSuit = suit;
     }
 
+    @SuppressWarnings("unchecked")
     public boolean step(TestAgent player) {
 
         System.out.println("\nPlayer "+player.getId()+"'s turn.");

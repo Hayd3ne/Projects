@@ -5,8 +5,10 @@ import game.Game;
 import agents.Agent;
 import java.util.List;
 
+@SuppressWarnings("rawtypes")
 public class RuleEngine <RuleT extends Rule, AgentT extends Agent, GameT extends Game> {
 
+    @SuppressWarnings("unchecked")
     public void applyRules(RuleT[] rules, Deck<MaoCard> deck, GameT game, AgentT agent) {
         for (RuleT rule : rules) {
             for (MaoCard c : deck) {
@@ -16,6 +18,7 @@ public class RuleEngine <RuleT extends Rule, AgentT extends Agent, GameT extends
             }
         }
     }
+    @SuppressWarnings("unchecked")
     public void applyRules(List<RuleT> rules, Deck<MaoCard> deck, GameT game, AgentT agent) {
         for (RuleT rule : rules) {
             if (rule instanceof Include11) rule.apply(new MaoCard(), game, agent);
@@ -28,6 +31,7 @@ public class RuleEngine <RuleT extends Rule, AgentT extends Agent, GameT extends
             }
         }
     }
+    @SuppressWarnings("unchecked")
     public boolean isPlayValid(MaoCard card, GameT game, AgentT agent) {
         Deck<MaoCard> lastCards = (Deck<MaoCard>) game.getDiscard();
         MaoCard lastCard = lastCards.drawCard();
@@ -55,9 +59,11 @@ public class RuleEngine <RuleT extends Rule, AgentT extends Agent, GameT extends
         return false;
     }
 
+    @SuppressWarnings("unchecked")
     public void cardEffect(MaoCard card, GameT game, AgentT agent) {
         if (card.getProperty(MaoCard.property.CHANGESUIT) != null) {
             if (card.getProperty(MaoCard.property.CHANGESUIT).equals(true)) {
+                @SuppressWarnings("unused")
                 MaoCard c = (MaoCard) agent.chooseSuit(game, card);
                 //System.out.println("Player " + agent.getId() + " Changed to " + c.getSuit());
             }

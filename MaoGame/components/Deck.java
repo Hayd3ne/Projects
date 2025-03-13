@@ -7,6 +7,7 @@ public class Deck <CardT extends Card> extends Stack<CardT> {
         //a blank deck
     }
 
+    @SuppressWarnings("unchecked")
     //creates a deck of the given size
     public Deck (int size) {
         for (int i = 0; i < size; i++) {
@@ -22,6 +23,7 @@ public class Deck <CardT extends Card> extends Stack<CardT> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private CardT createCard(Card.ranks r, Card.suits s, CardT c) {
         if (c instanceof MaoCard) {
             return (CardT) new MaoCard(r, s);
@@ -93,6 +95,7 @@ public class Deck <CardT extends Card> extends Stack<CardT> {
         return (CardT) pop();
     }
 
+    @SuppressWarnings("unchecked")
     public CardT[] drawCards(int n) {
         Object[] out = new Object[n];
         for (int i = 0; i < n; i++) {

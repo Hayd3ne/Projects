@@ -3,6 +3,7 @@ import components.Card;
 import components.Deck;
 import game.BasicMaoSimulator;
 
+@SuppressWarnings("unused") 
 public class BasicMaoAgent {
     private Card[] hand;
     private int id;
@@ -46,7 +47,8 @@ public class BasicMaoAgent {
         return null;
     }
 
-    private void drawCard(Deck deck) {
+    @SuppressWarnings("rawtypes")
+    private void drawCard( Deck deck) {
         Card[] newHand = new Card[this.hand.length + 1];
         for (int i = 0; i < this.hand.length; i++) {
             newHand[i] = this.hand[i];
