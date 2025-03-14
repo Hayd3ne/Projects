@@ -9,6 +9,10 @@ public class Include11 <GameT extends Game<AgentT, MaoCard>, AgentT extends Agen
 extends Rule<GameT, AgentT> {
 
 
+    public MaoCard.property getProperty() {
+        return null;
+    }
+
     @Override
     public boolean isValid(MaoCard card, GameT game, AgentT agent) {
         return true;

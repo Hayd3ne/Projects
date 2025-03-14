@@ -7,6 +7,13 @@ import agents.Agent;
 public class WildJacks <GameT extends Game<AgentT, MaoCard>, AgentT extends Agent> 
 extends Rule<GameT, AgentT> {
 
+    public static final MaoCard.property property = MaoCard.property.WILD;
+
+    @Override
+    public MaoCard.property getProperty() {
+        return property;
+    }
+
     @Override
     public boolean isValid(MaoCard card, GameT game, AgentT agent) {
         return card.getMaoRank() == MaoCard.ranks.JACK;
@@ -14,11 +21,11 @@ extends Rule<GameT, AgentT> {
 
     @Override
     public void apply(MaoCard card, GameT game, AgentT agent) {
-        card.setProperty((Object)MaoCard.property.WILD, true);
+        card.setProperty(property, true);
     }
 
     @Override
     public void undo(MaoCard card, GameT game, AgentT agent) {
-        card.setProperty((Object)MaoCard.property.WILD, false);
+        card.setProperty(property, false);
     }
 }

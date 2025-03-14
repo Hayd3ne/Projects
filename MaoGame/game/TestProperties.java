@@ -1,16 +1,16 @@
 package game;
 import components.Deck;
 import components.MaoCard;
-import agents.TestAgent;
+import agents.SimpleMaoAgent;
 import rules.*;
 import java.util.List;
 
 @SuppressWarnings("rawtypes")
-public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard> {
+public class TestProperties <RuleT extends Rule> extends Game<SimpleMaoAgent, MaoCard> {
 
     private Deck<MaoCard> deck;
     private Deck<MaoCard> discard;
-    private TestAgent[] players;
+    private SimpleMaoAgent[] players;
     private RuleEngine re;
     private List<Object> rules;
     private MaoCard.suits curSuit;
@@ -24,7 +24,7 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
             MaoCard firstCard = (MaoCard)game.getDeck().drawCard();
             game.setSuit(firstCard.getSuit());
             game.discard.addCard(firstCard);
-            for (TestAgent player : game.getPlayers()) {
+            for (SimpleMaoAgent player : game.getPlayers()) {
                 for (int i = 0; i < 5; i++) {
                     player.drawCard(game.getDeck());
                 }
@@ -32,7 +32,7 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
             
             boolean running = true;
             while (running) {
-                for (TestAgent player : game.getPlayers()) {
+                for (SimpleMaoAgent player : game.getPlayers()) {
                     running = game.step(player);
                     if (!running) {
                         break;
@@ -45,9 +45,9 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
     public TestProperties() {
         this.deck = new Deck<MaoCard>(52, new MaoCard());
         this.deck.shuffle();
-        this.players = new TestAgent[2];
-        this.players[0] = new TestAgent(1);
-        this.players[1] = new TestAgent(2);
+        this.players = new SimpleMaoAgent[2];
+        this.players[0] = new SimpleMaoAgent(1);
+        this.players[1] = new SimpleMaoAgent(2);
         this.discard = new Deck<MaoCard>();
 
 
@@ -77,7 +77,7 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
         return discard;
     }
 
-    public TestAgent[] getPlayers() {
+    public SimpleMaoAgent[] getPlayers() {
         return players;
     }
 
@@ -90,7 +90,7 @@ public class TestProperties <RuleT extends Rule> extends Game<TestAgent, MaoCard
     }
 
     @SuppressWarnings("unchecked")
-    public boolean step(TestAgent player) {
+    public boolean step(SimpleMaoAgent player) {
 
         System.out.println("\nPlayer "+player.getId()+"'s turn.");
 

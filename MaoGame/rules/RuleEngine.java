@@ -60,6 +60,45 @@ public class RuleEngine <RuleT extends Rule, AgentT extends Agent, GameT extends
     }
 
     @SuppressWarnings("unchecked")
+    public boolean isPlayValid(MaoCard card, GameT game, AgentT agent, List<RuleT> rules) {
+        Deck<MaoCard> lastCards = (Deck<MaoCard>) game.getDiscard();
+        MaoCard lastCard = lastCards.drawCard();
+        //System.out.println(card);
+        //System.out.println(card.getProperties());
+        for (RuleT rule : rules) {
+            if (rule instanceof Include11 || rule instanceof Include1 || rule instanceof Include0) continue;
+            if (rule.isValid(card, game, agent)) {
+                switch(rule.getProperty()) {
+                    case WILD:
+                        return true;
+                    case RANKPARITY:
+                        if (card.getProperty(MaoCard.property.RANKPARITY) != null) if (card.getProperty(MaoCard.property.RANKPARITY).equals(true)) {
+                            if (card.getProperty(MaoCard.property.RANK) == lastCard.getProperty(MaoCard.property.RANK)) {
+                                //System.out.println("Card Rank: " + card.getProperty(MaoCard.property.RANK));
+                                lastCards.addCard(lastCard);
+                                return true;
+                            }
+                        }
+                        break;
+                    case SUITPARITY:
+                        if (card.getProperty(MaoCard.property.SUITPARITY) != null) if (card.getProperty(MaoCard.property.SUITPARITY).equals(true)) {
+                            if (card.getSuit() == game.getCurSuit()) {
+                                //System.out.println("Card Suit: " + card.getSuit());
+                                lastCards.addCard(lastCard);
+                                return true;
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        lastCards.addCard(lastCard);
+        return false;
+    }
+
+    @SuppressWarnings("unchecked")
     public void cardEffect(MaoCard card, GameT game, AgentT agent) {
         if (card.getProperty(MaoCard.property.CHANGESUIT) != null) {
             if (card.getProperty(MaoCard.property.CHANGESUIT).equals(true)) {

@@ -5,18 +5,19 @@ import components.MaoCard.property;
 import game.Game;
 import rules.*;
 
-import java.util.Collections;
 import java.util.List;
 
 public abstract class MaoAgent <GameT extends Game<?, MaoCard>> extends Agent<GameT,MaoCard> implements Predictor {
 
     public List<property> getProperties (MaoCard lastCard, MaoCard card) {
-        if (card.getRank() != lastCard.getRank() && card.getSuit() != lastCard.getSuit()) {
-            return Collections.singletonList(property.WILD);
-            //note, in the current rules, the only way a card can be played that is not of the same
-            //suit or rank is a wild. This may change as we add more possible rules to the game
-        }
         List<property> properties = new java.util.ArrayList<>();
+
+        if (card.getRank() != lastCard.getRank() && card.getSuit() != lastCard.getSuit()) {
+            properties.add(property.CHANGESUIT);
+            //note, in the current rules, the only way a card can be played that is not of the same
+            //suit or rank is a wild, or the suit has changed. 
+            //This may change as we add more possible rules to the game
+        }
         if (card.getRank() == lastCard.getRank()) {
             properties.add(property.RANKPARITY);
         }

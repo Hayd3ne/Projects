@@ -1,0 +1,21 @@
+	  --- PROPERTIES ---    
+     Property	  |Description
+Suit		  |1 of 4 "Colors" a card can have: Spades, Clubs, Hearts, and Diamonds
+Rank		  |The name of the card. Correlated with card value. Ex. Two, Three, King, Jack
+Wild		  |Card can be played regardless of suit or rank
+Skips		  |Card skips the next player in turn
+Reverses	  |Card reverses the order of play
+Adds		  |Card forces the next player to draw a number of cards (normally a small amount)
+ChangeSuit	  |Card allows the active player to choose the next suit
+Punish		  |Card forces the active player to draw a card after playing
+SkipAll		  |Card skips all players; Effectively gives another turn
+Jumpable	  |Card can be played immediately after a card of the same rank and suit is played
+
+
+	    --- RULES ---
+	Rule      |Description
+SameSuits	  |Cards May be played on the same Suit (Default)
+SameRanks	  |Cards May be played on the same Rank (Default)
+WildJacks	  |Jacks are wild (Default)
+JacksChangeSuit	  |Jacks change suit (Default)
+		  |

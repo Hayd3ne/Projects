@@ -8,6 +8,9 @@ import agents.Agent;
 public class Include0 <GameT extends Game<AgentT, MaoCard>, AgentT extends Agent> 
 extends Rule<GameT, AgentT> {
 
+    public MaoCard.property getProperty() {
+        return null;
+    }
 
     @Override
     public boolean isValid(MaoCard card, GameT game, AgentT agent) {

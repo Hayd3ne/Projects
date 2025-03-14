@@ -8,6 +8,13 @@ import agents.Agent;
 public class SameSuits <GameT extends Game<AgentT, MaoCard>, AgentT extends Agent> 
 extends Rule<GameT, AgentT> {
 
+    public static final MaoCard.property property = MaoCard.property.SUITPARITY;
+
+    @Override
+    public MaoCard.property getProperty() {
+        return property;
+    }
+
     @Override
     public boolean isValid(MaoCard card, GameT game, AgentT agent) {
         return true;
@@ -15,11 +22,11 @@ extends Rule<GameT, AgentT> {
 
     @Override
     public void apply(MaoCard card, GameT game, AgentT agent) {
-        card.setProperty(MaoCard.property.SUITPARITY, true);
+        card.setProperty(property, true);
     }
 
     @Override
     public void undo(MaoCard card, GameT game, AgentT agent) {
-        card.setProperty(MaoCard.property.SUITPARITY, false);
+        card.setProperty(property, false);
     }
 }
