@@ -4,6 +4,7 @@ import components.MaoCard;
 import agents.SimpleMaoAgent;
 import rules.*;
 import java.util.List;
+import java.util.Scanner;
 
 @SuppressWarnings("rawtypes")
 public class TestProperties <RuleT extends Rule> extends Game<SimpleMaoAgent, MaoCard> {
@@ -19,24 +20,69 @@ public class TestProperties <RuleT extends Rule> extends Game<SimpleMaoAgent, Ma
 
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
-            TestProperties game = new TestProperties();
+            TestProperties game = new TestProperties();            
 
-            MaoCard firstCard = (MaoCard)game.getDeck().drawCard();
+            Scanner in = new Scanner(System.in);
+
+
+            @SuppressWarnings("unused")
+            int gameCount = 0;
+            while (true) {
+                game.setup(game);
+                boolean running = true;
+                int numSteps = 0;
+                while (running) {
+                    numSteps++;
+                    if (numSteps >= 200) {
+                        System.out.println("No one wins.");
+                        running = false;
+                        break;
+                    }
+                    for (SimpleMaoAgent player : game.getPlayers()) {
+                        running = game.step(player);
+                        if (!running) {
+                            break;
+                        }
+                    }
+                }
+                gameCount++;
+                System.out.println("Continue? (y/n)");
+                String response = in.nextLine();
+                if (response.toLowerCase().equals("n")) {
+                    running = false;
+                    break;
+                }
+                /* 
+                switch(gameCount) {
+                    case 1:
+                        game = new TestProperties(game,new Include0());
+                        break;
+                    case 2:
+                        game = new TestProperties(game,new Include1());
+                        break;
+                    case 3:
+                        game = new TestProperties(game,new Include11());
+                        break;
+                    default:
+                        game = new TestProperties(game,null);
+                        break;
+                }
+                */
+
+                game = new TestProperties(game,null);
+        }
+        in.close();
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public void setup(TestProperties game) {
+        MaoCard firstCard = (MaoCard)game.getDeck().drawCard();
             game.setSuit(firstCard.getSuit());
-            game.discard.addCard(firstCard);
+            game.getDiscard().addCard(firstCard);
             for (SimpleMaoAgent player : game.getPlayers()) {
                 for (int i = 0; i < 5; i++) {
                     player.drawCard(game.getDeck());
-                }
-            }
-            
-            boolean running = true;
-            while (running) {
-                for (SimpleMaoAgent player : game.getPlayers()) {
-                    running = game.step(player);
-                    if (!running) {
-                        break;
-                    }
                 }
             }
     }
@@ -53,13 +99,42 @@ public class TestProperties <RuleT extends Rule> extends Game<SimpleMaoAgent, Ma
 
         this.re = new RuleEngine();
         this.rules = new java.util.ArrayList<>();
-        this.rules.add(new Include11());
-        this.rules.add(new Include1());
-        this.rules.add(new Include0());
         this.rules.add(new WildJacks());
         this.rules.add(new SameRanks());
         this.rules.add(new SameSuits()); // The round 1 rules
         this.rules.add(new JacksChangeSuit());
+        this.re.applyRules(rules, deck, this, null);
+        this.deckSize = this.deck.size();
+        this.deck.shuffle();
+    }
+
+    @SuppressWarnings("unchecked")
+    public TestProperties(TestProperties lastGame, RuleT newRule) {
+        //add player cards and discard cards back into the deck
+        for (SimpleMaoAgent player : lastGame.getPlayers()) {
+            for (MaoCard card : player.getHand()) {
+                lastGame.getDeck().addCard(card);
+                player.removeCard(card);
+            }
+        }
+        while (!lastGame.getDiscard().isEmpty()) { 
+            lastGame.getDeck().addCard(lastGame.getDiscard().drawCard());
+        }
+        this.deck = lastGame.getDeck();
+        this.players = lastGame.getPlayers();
+        this.discard = lastGame.getDiscard();
+
+
+        this.re = lastGame.getRuleEngine();
+        this.rules = lastGame.rules;
+        if (newRule != null) this.rules.add(newRule);
+        if (newRule instanceof Include11 || newRule instanceof Include1 || newRule instanceof Include0) {
+            Deck<MaoCard> temp = new Deck(0, new MaoCard());
+            System.out.println("Deck Size: "+this.deck.size());
+            this.re.applyRules(this.rules, temp, this, null);
+            this.deck = this.deck.combineDecks(deck, temp);
+            System.out.println("Deck Size: "+this.deck.size());
+        }
         this.re.applyRules(rules, deck, this, null);
         this.deckSize = this.deck.size();
         this.deck.shuffle();
@@ -99,6 +174,13 @@ public class TestProperties <RuleT extends Rule> extends Game<SimpleMaoAgent, Ma
         //System.out.println("Top Card Properties: "+top.getProperties());
         System.out.println("Current Suit: "+this.curSuit);
         this.discard.addCard(top);
+        System.out.println("Cards in the Deck: "+this.deck.size());
+        System.out.println("Cards in the Discard: "+this.discard.size());
+        int playerCards = 0;
+        for (Object e : this.getPlayers()) {
+            playerCards += ((SimpleMaoAgent)e).getHand().length;
+        }
+        System.out.println("Cards held by Players: "+playerCards);
 
         System.out.println("------------------");
         for (MaoCard c : player.getHand()) {

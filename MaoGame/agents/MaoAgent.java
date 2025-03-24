@@ -50,8 +50,14 @@ public abstract class MaoAgent <GameT extends Game<?, MaoCard>> extends Agent<Ga
     public List<Rule> predictRules (List<Rule> prediction, MaoCard lastCard, MaoCard card) {
         List<property> properties = getProperties(lastCard, card);
         List<Rule> rules = predictRules(properties);
+
         //find the intersection of the two lists
         rules.retainAll(prediction);
+
+        //if the card is an 11, 0, or 1, it pretty easy to predict the rule
+        if (card.getMaoRank() == MaoCard.ranks.ELEVEN) rules.add(new Include11());
+        else if (card.getMaoRank() == MaoCard.ranks.ZERO) rules.add(new Include0());
+        else if (card.getMaoRank() == MaoCard.ranks.ONE) rules.add(new Include1());
         return rules;
     }
 }

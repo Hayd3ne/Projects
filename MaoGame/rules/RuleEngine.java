@@ -21,6 +21,8 @@ public class RuleEngine <RuleT extends Rule, AgentT extends Agent, GameT extends
     @SuppressWarnings("unchecked")
     public void applyRules(List<RuleT> rules, Deck<MaoCard> deck, GameT game, AgentT agent) {
         for (RuleT rule : rules) {
+            //System.out.println(rule.isApplied(null, game, agent));
+            if (rule.isApplied(null, game, agent)) continue; //skip rules that have already been applied
             if (rule instanceof Include11) rule.apply(new MaoCard(), game, agent);
             else if (rule instanceof Include1) rule.apply(new MaoCard(), game, agent);
             else if (rule instanceof Include0) rule.apply(new MaoCard(), game, agent);
@@ -70,6 +72,7 @@ public class RuleEngine <RuleT extends Rule, AgentT extends Agent, GameT extends
             if (rule.isValid(card, game, agent)) {
                 switch(rule.getProperty()) {
                     case WILD:
+                        lastCards.addCard(lastCard);
                         return true;
                     case RANKPARITY:
                         if (card.getProperty(MaoCard.property.RANKPARITY) != null) if (card.getProperty(MaoCard.property.RANKPARITY).equals(true)) {

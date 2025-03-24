@@ -8,6 +8,7 @@ import agents.Agent;
 public class Include11 <GameT extends Game<AgentT, MaoCard>, AgentT extends Agent> 
 extends Rule<GameT, AgentT> {
 
+    public boolean applied = false;
 
     public MaoCard.property getProperty() {
         return null;
@@ -18,6 +19,10 @@ extends Rule<GameT, AgentT> {
         return true;
     }
 
+    public boolean isApplied(MaoCard card, GameT game, AgentT agent) {
+        return applied;
+    }
+
     @Override
     public void apply(MaoCard card, GameT game, AgentT agent) {
         Deck<MaoCard> deck = game.getDeck();
@@ -25,6 +30,7 @@ extends Rule<GameT, AgentT> {
         deck.addCard(new MaoCard(MaoCard.ranks.ELEVEN, MaoCard.suits.DIAMONDS,true));
         deck.addCard(new MaoCard(MaoCard.ranks.ELEVEN, MaoCard.suits.HEARTS,true));
         deck.addCard(new MaoCard(MaoCard.ranks.ELEVEN, MaoCard.suits.SPADES,true));
+        applied = true;
     }
 
     @Override
@@ -34,5 +40,6 @@ extends Rule<GameT, AgentT> {
         deck.removeCard(new MaoCard(MaoCard.ranks.ELEVEN, MaoCard.suits.DIAMONDS,true));
         deck.removeCard(new MaoCard(MaoCard.ranks.ELEVEN, MaoCard.suits.HEARTS,true));
         deck.removeCard(new MaoCard(MaoCard.ranks.ELEVEN, MaoCard.suits.SPADES,true));
+        applied = false;
     }
 }

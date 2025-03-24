@@ -50,6 +50,7 @@ public class SimpleMaoAgent extends MaoAgent<TestProperties<Rule>> {
                 //System.out.println(predictedRules);
                 //System.out.println(prediction);
                 predictedRules.add(prediction);
+                System.out.println(prediction);
             }
 
         }

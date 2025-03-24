@@ -9,6 +9,7 @@ public class SameSuits <GameT extends Game<AgentT, MaoCard>, AgentT extends Agen
 extends Rule<GameT, AgentT> {
 
     public static final MaoCard.property property = MaoCard.property.SUITPARITY;
+    public boolean applied = false;
 
     @Override
     public MaoCard.property getProperty() {
@@ -21,12 +22,19 @@ extends Rule<GameT, AgentT> {
     }
 
     @Override
+    public boolean isApplied(MaoCard card, GameT game, AgentT agent) {
+        return applied;
+    }
+
+    @Override
     public void apply(MaoCard card, GameT game, AgentT agent) {
         card.setProperty(property, true);
+        applied = true;
     }
 
     @Override
     public void undo(MaoCard card, GameT game, AgentT agent) {
         card.setProperty(property, false);
+        applied = false;
     }
 }

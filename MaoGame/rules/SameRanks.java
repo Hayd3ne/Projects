@@ -8,6 +8,7 @@ public class SameRanks <GameT extends Game<AgentT, MaoCard>, AgentT extends Agen
 extends Rule<GameT, AgentT> {
 
     public final static MaoCard.property property = MaoCard.property.RANKPARITY;
+    public boolean applied = false;
 
     @Override
     public MaoCard.property getProperty() {
@@ -19,13 +20,19 @@ extends Rule<GameT, AgentT> {
         return true;
     }
 
+    public boolean isApplied(MaoCard card, GameT game, AgentT agent) {
+        return applied;
+    }
+
     @Override
     public void apply(MaoCard card, GameT game, AgentT agent) {
         card.setProperty(property, true);
+        applied = true;
     }
 
     @Override
     public void undo(MaoCard card, GameT game, AgentT agent) {
         card.setProperty(property, false);
+        applied = false;
     }
 }

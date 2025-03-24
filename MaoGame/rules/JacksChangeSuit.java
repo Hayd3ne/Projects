@@ -8,6 +8,7 @@ public class JacksChangeSuit <GameT extends Game<AgentT, MaoCard>, AgentT extend
 extends Rule<GameT, AgentT> {
 
     public static final MaoCard.property property = MaoCard.property.CHANGESUIT;
+    public boolean applied = false;
 
     @Override
     public MaoCard.property getProperty() {
@@ -19,13 +20,19 @@ extends Rule<GameT, AgentT> {
         return card.getMaoRank() == MaoCard.ranks.JACK;
     }
 
+    public boolean isApplied(MaoCard card, GameT game, AgentT agent) {
+        return applied;
+    }
+
     @Override
     public void apply(MaoCard card, GameT game, AgentT agent) {
         card.setProperty(property, true);
+        applied = true;
     }
 
     @Override
     public void undo(MaoCard card, GameT game, AgentT agent) {
         card.setProperty(property, false);
+        applied = false;
     }
 }
