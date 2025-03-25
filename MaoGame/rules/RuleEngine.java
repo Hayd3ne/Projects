@@ -33,6 +33,32 @@ public class RuleEngine <RuleT extends Rule, AgentT extends Agent, GameT extends
             }
         }
     }
+
+    @SuppressWarnings("unchecked")
+    public void applyRules(List<RuleT> rules, Deck<MaoCard> deck, GameT game, AgentT agent, boolean marker) {
+        for (RuleT rule : rules) {
+            //System.out.println(rule.isApplied(null, game, agent));
+            if (rule instanceof Include11) {
+                if (deck.stream().anyMatch(c -> c.getProperty(MaoCard.property.RANK) == MaoCard.ranks.ELEVEN)) continue;
+                rule.apply(new MaoCard(), game, agent);
+            }
+            else if (rule instanceof Include1) 
+            {
+                if (deck.stream().anyMatch(c -> c.getProperty(MaoCard.property.RANK) == MaoCard.ranks.ONE)) continue;
+                rule.apply(new MaoCard(), game, agent);
+            }
+            else if (rule instanceof Include0) {
+                if (deck.stream().anyMatch(c -> c.getProperty(MaoCard.property.RANK) == MaoCard.ranks.ZERO)) continue;
+                rule.apply(new MaoCard(), game, agent);
+            }
+            else for (MaoCard c : deck) {
+                if (rule.isValid(c, game, agent)) {
+                    rule.apply(c, game, agent);
+                }
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public boolean isPlayValid(MaoCard card, GameT game, AgentT agent) {
         Deck<MaoCard> lastCards = (Deck<MaoCard>) game.getDiscard();

@@ -5,7 +5,6 @@ import components.MaoCard;
 import game.TestProperties;
 import rules.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("rawtypes")
@@ -20,7 +19,11 @@ public class SimpleMaoAgent extends MaoAgent<TestProperties<Rule>> {
     }
 
     public SimpleMaoAgent(int id) {
-        this.knownRules = Arrays.asList(new WildJacks(), new SameRanks(), new SameSuits(), new JacksChangeSuit());
+        this.knownRules = new java.util.ArrayList<>();
+        this.knownRules.add(new SameSuits());
+        this.knownRules.add(new SameRanks());
+        this.knownRules.add(new WildJacks());
+        this.knownRules.add(new JacksChangeSuit());
         this.hand = new java.util.ArrayList<>();
         this.id = id;
     }
@@ -35,14 +38,46 @@ public class SimpleMaoAgent extends MaoAgent<TestProperties<Rule>> {
 
     @SuppressWarnings("unchecked")
     public MaoCard takeTurn(TestProperties game) {
+
+        System.out.println("Player "+ id + " knows the following rules: "+knownRules);
+        System.out.println("Player " + id + " is predicting the following rules: " + predictedRules);
+
         MaoCard topCard = null;
         MaoCard lastCard = null;
+        boolean newRule = false;
         if (game.getDiscard().size() >= 2) {
             topCard = (MaoCard)game.getDiscard().drawCard();
+            //we only need to predict new rules if the last card played is not valid in our known rules
+            if (!game.getRuleEngine().isPlayValid(topCard, game, this, knownRules)) {
+                newRule = true;
+            }
             lastCard = (MaoCard)game.getDiscard().drawCard();
+
         }
         //if we haven't predicted anything yet, do so now
-        if (predictedRules == null) {
+
+        //if we have an 0, 1, or 11, we can predict the rule pretty easily
+        for (MaoCard c : hand) {
+            if (c.getProperty(MaoCard.property.RANK) == MaoCard.ranks.ZERO) {
+                if (!knownRules.stream().anyMatch(obj -> obj instanceof Include0)) {
+                    this.knownRules.add(new Include0());
+                    //System.out.println(c.getProperties());
+                }
+            }
+            if (c.getProperty(MaoCard.property.RANK) == MaoCard.ranks.ONE) {
+                if (!knownRules.stream().anyMatch(obj -> obj instanceof Include1)) {
+                    this.knownRules.add(new Include1());
+                    //System.out.println(c.getProperties());
+                }
+            }
+            if (c.getProperty(MaoCard.property.RANK) == MaoCard.ranks.ELEVEN) {
+                if (!knownRules.stream().anyMatch(obj -> obj instanceof Include11)) {
+                    this.knownRules.add(new Include11());
+                    //System.out.println(c.getProperties());
+                }                
+            }
+        }
+        if (predictedRules == null&&newRule) {
             //we can only predict rules if it isn't the first turn of the game
             if (game.getDiscard().size() >= 2) {
                 List<Rule> prediction = new java.util.ArrayList<>();
@@ -54,11 +89,11 @@ public class SimpleMaoAgent extends MaoAgent<TestProperties<Rule>> {
             }
 
         }
-        else for (List<Rule> prediction : predictedRules) {
+        else if (newRule) for (List<Rule> prediction : predictedRules) {
             //refine predictions
             prediction = predictRules(prediction, lastCard, topCard);
-            if (prediction.size() <= 1) {
-                knownRules.retainAll(prediction);
+            if (prediction.size() == 1) { //presumably, we can only add a single rule per round
+                knownRules.add(prediction.get(0));
                 predictedRules.remove(prediction);
             }
         }

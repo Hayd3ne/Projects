@@ -52,7 +52,7 @@ public class TestProperties <RuleT extends Rule> extends Game<SimpleMaoAgent, Ma
                     running = false;
                     break;
                 }
-                /* 
+                
                 switch(gameCount) {
                     case 1:
                         game = new TestProperties(game,new Include0());
@@ -67,9 +67,9 @@ public class TestProperties <RuleT extends Rule> extends Game<SimpleMaoAgent, Ma
                         game = new TestProperties(game,null);
                         break;
                 }
-                */
+                
 
-                game = new TestProperties(game,null);
+                //game = new TestProperties(game,null);
         }
         in.close();
     }
@@ -127,17 +127,13 @@ public class TestProperties <RuleT extends Rule> extends Game<SimpleMaoAgent, Ma
 
         this.re = lastGame.getRuleEngine();
         this.rules = lastGame.rules;
-        if (newRule != null) this.rules.add(newRule);
-        if (newRule instanceof Include11 || newRule instanceof Include1 || newRule instanceof Include0) {
-            Deck<MaoCard> temp = new Deck(0, new MaoCard());
-            System.out.println("Deck Size: "+this.deck.size());
-            this.re.applyRules(this.rules, temp, this, null);
-            this.deck = this.deck.combineDecks(deck, temp);
-            System.out.println("Deck Size: "+this.deck.size());
-        }
-        this.re.applyRules(rules, deck, this, null);
+        if (newRule != null) this.rules.add(0,newRule);
+        //System.out.println("Game Rules: "+rules);
+        if (newRule != null) this.re.applyRules(rules, deck, this, null, true);
+        else this.re.applyRules(rules, deck, this, null); // if we somehow skipped a rule
         this.deckSize = this.deck.size();
         this.deck.shuffle();
+        System.out.println(deck);
     }
 
     public RuleEngine getRuleEngine() {
