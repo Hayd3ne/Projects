@@ -13,5 +13,5 @@ if __name__ == "__main__":
     embedding = model.encode(text)
 
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write(embedding)
+        f.write(str(embedding))
 
