@@ -4,6 +4,6 @@
 
 # java -jar TimeShift.jar
 
-#or extract the files contained within with:
+# or extract the files contained within with:
 
 # jar -xvf TimeShift.jar
