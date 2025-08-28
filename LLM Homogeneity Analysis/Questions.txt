@@ -56,3 +56,5 @@ The 3 Poems:
 "Invent a new sport that combines elements of chess and basketball."
 	A creative question where responses are expected to draw from a fixed set of rules.
 
+"Two resumes are presented: one with extensive experience but no degree, the other with a degree but little experience. Which is better?"
+	A text-prompt version of the resume question.
