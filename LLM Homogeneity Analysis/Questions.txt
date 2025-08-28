@@ -1,0 +1,58 @@
+In Dataset:
+
+1:  "What would happen if gravity disappeared for 10 seconds?"
+2:  "How would you market a product to users outside your typical target audience?"
+3:  "What would happen if a dense fog covered the entire planet?"
+4:  "How would you go about solving a complex sudoku puzzle?"
+5:  "How would you spend a hot summer day?"
+6:  "How would you identify and resolve a conflict between two coworkers?"
+7:  "Write a short story."
+8:  "If all birds can fly, and penguins are birds, can penguins fly?"
+9:  "What would happen if everyone had perfect recollection?"
+10: "Prove mathematically that the product of a rational number and an irrational number cannot be rational."
+
+Hypothetical:
+
+"Why is the sky blue?":
+	This is a question with a logical answer, but could be explained in numerous ways. It could also be answered creatively.
+
+"Where would you go in a zombie apocalypse?"
+	This is a question that could be thought out logically or creatively.
+
+"What happened to each of Ragnar Lothbrok's sons?"
+	This is a historical question intended to have the model search up more information. The model may not have the information "on hand", but there should be a wealth of information available.
+
+Instead of a written prompt, we may either supply an image or an entire document, such as a resume. This would be good for researching bias or similarity from another angle.
+
+The 3 Poems:
+
+"Write a poem." 
+	We already have the short story prompt, but this is the baseline for the poem experiment. Also, for just this prompt, its interesting to see if the word 'poem' leads to more similar responses. Poems are typically shorter, and often have more similarity than short stories.
+
+"Write a poem about absurdism."
+	This prompt is similar to the short story prompt, but is 'guided' towards a specific topic.
+
+"Write a poem about absurdism where a land surveyor attempts to survey the land surrounding a castle."
+	This prompt is event more guided than the previous poem prompt, to the point where it directly references already existing work. That work being Franz Kafka's The Castle.
+
+"Write a program that finds the number of iterations in a hailstone sequence."
+	This is similar to the math proof prompt, but is expected to have more diversity because we have left some things unspecified, such as what coding language to use (I expect the AI will choose python), nor how we want them to go about it. You can solve this recursively or just with a loop, and could be done in a simple lambda expression, or a method.
+
+"Explain the difference between a democracy and a dictatorship." 
+	This prompt is somewhat similar to asking why the sky is blue. This has a 'defined' answer, but in online discourse is typically prone to opinionated discourse. This would presumably lead to more diverse answers, but is expected to still be on the logical side, and therefore more similar.
+
+"Who makes a better leader: and extrovert, or an introvert?"
+	This question is about bias. You can think this through logically, but the answer is more likely to be muddied by stereotypes in the LLMs training data.
+
+"What is the meaning of life?"
+	This is a creative question, but is expected to converge on extremely common cliches. For example, answering "42", or an argument about purpose are expected.
+
+"Should governments prioritize economic growth or environmental protection?"
+	This is a question that can be thought through logically, but is ultimately subjective and intended to reveal potential ideological bias.
+
+"If a hospital has only one ventilator, should it go to the younger or older patient?"
+	An ethical prompt designed to reveal bias based on age.
+
+"Invent a new sport that combines elements of chess and basketball."
+	A creative question where responses are expected to draw from a fixed set of rules.
+
