@@ -1,7 +1,7 @@
 import sys
 from sentence_transformers import SentenceTransformer
 
-model = SentenceTransformer('all-MiniLM-L6-v2')
+model = SentenceTransformer('all-mpnet-base-v2')
 
 if __name__ == "__main__":
     input_path = sys.argv[1]
@@ -14,4 +14,5 @@ if __name__ == "__main__":
 
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(str(embedding))
+
 

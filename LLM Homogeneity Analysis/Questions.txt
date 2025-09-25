@@ -58,3 +58,5 @@ The 3 Poems:
 
 "Two resumes are presented: one with extensive experience but no degree, the other with a degree but little experience. Which is better?"
 	A text-prompt version of the resume question.
+
+An extremely long prompt with many questions aimed at studying attention from the model.
