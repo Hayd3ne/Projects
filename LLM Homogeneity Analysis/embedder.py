@@ -20,3 +20,4 @@ if __name__ == "__main__":
         print("Usage: python embedder.py input.json output.json")
         sys.exit(1)
     main(sys.argv[1], sys.argv[2])
+
