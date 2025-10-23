@@ -1,0 +1,13 @@
+1: Finish long prompt
+2: Finish data collection
+	Combine datasets (Mine & Smera's)
+3: Finish Embedder script in VBA
+	Embed dataset
+4: Write the python script to:
+	Collect similarities
+		Start with Cosine Similarity
+	Collect length, word frequency, word cloud
+5: Finish Methodology section of paper
+6. Make precise, simple, yet complex research questions
+
+
