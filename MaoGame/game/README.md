@@ -1,1 +1,0 @@
-## This Directory contains classes used for internal game logic. In other words, it contains classes related to the model of Mao.

@@ -1,1 +1,0 @@
-## This directory contains the classes used for the rules in Mao. Check Rule.java for a template of how rules should be made. For a more detailed template, check any .java file except for RuleLoader, and RuleEngine.

@@ -1,1 +1,0 @@
-## this directory contains classes to be used by other aspects of Mao. Most importantly, this is where information about cards are created.
