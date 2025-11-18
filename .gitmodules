@@ -1,0 +1,3 @@
+[submodule "LLM Homogeneity Analysis"]
+	path = LLM Homogeneity Analysis
+	url = https://github.com/Hayd3ne/LLM-Homogeneity-Analysis.git
