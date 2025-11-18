@@ -4,3 +4,6 @@
 [submodule "WuMedCoProject"]
 	path = WuMedCoProject
 	url = https://github.com/jvillanueva3651/WUMedCoProject.git
+[submodule "MaoProject"]
+	path = MaoProject
+	url = https://github.com/Gibby990/MaoProject.git
