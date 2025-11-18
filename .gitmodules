@@ -7,3 +7,7 @@
 [submodule "MaoProject"]
 	path = MaoProject
 	url = https://github.com/Gibby990/MaoProject.git
+[submodule "MaestroMinds"]
+	path = MaestroMinds
+	url = https://github.com/jvillanueva3651/MaestroMinds.git
+	branch = master
