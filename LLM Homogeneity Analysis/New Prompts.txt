@@ -1,0 +1,6 @@
+Factual:
+"Solve: 123456 x 234567"
+"How many 'r's are in the word Strawberry?"
+
+Logical:
+How many Strawberries are in the letter 'r'?
